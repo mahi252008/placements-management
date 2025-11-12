@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>ITM SLS Placement Portal</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin:0; padding:0; font-family: 'Poppins', sans-serif; }
+  html,body { height:100%; }
+
+  /* Try local campus.jpg first, fallback to online image if missing */
+  :root{
+    --fallback-url: url("https://akm-img-a-in.tosshub.com/sites/resources/campus/prod/img/campusview/2023/8/181bb11e5d0ca483960169541.jpg");
+  }
+
+  body {
+    min-height:100%;
+    /* local image (campus.jpg) is first; if not found browser still tries fallback via background-image with comma order */
+    background-image: url('campus.jpg'), var(--fallback-url);
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-attachment: fixed;
+    background-size: cover;
+    margin:0;
+    color: #002147;
+  }
+
+  /* dark overlay for readability */
+  .overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.45);
+    backdrop-filter: blur(2px);
+    z-index: 0;
+  }
+
+  /* header */
+  header {
+    position: relative;
+    z-index: 2;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:18px 40px;
+    color: #fff;
+  }
+  header .brand {
+    display:flex;
+    align-items:center;
+    gap:14px;
+  }
+  header .brand img {
+    width:64px; height:64px; object-fit:contain; border-radius:6px; background:#fff;
+  }
+  header h1 {
+    font-size:20px; margin:0; font-weight:700; letter-spacing:0.2px;
+  }
+  header nav { display:flex; gap:12px; align-items:center; }
+  header nav a {
+    color: #fff; text-decoration:none; padding:8px 12px; border-radius:6px;
+    font-weight:600; background: rgba(255,255,255,0.06);
+  }
+  header nav a:hover { background: rgba(255,255,255,0.12); }
+
+  /* HERO */
+  .hero {
+    min-height:56vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    position:relative;
+    z-index:2;
+    text-align:center;
+    padding: 32px 20px;
+  }
+  .hero h2 {
+    color:#fff;
+    font-size:42px;
+    font-weight:700;
+    text-shadow: 0 6px 20px rgba(0,0,0,0.6);
+    max-width:1000px;
+    margin:0 auto;
+  }
+  .hero p {
+    color: rgba(255,255,255,0.9);
+    margin-top:12px;
+    font-size:16px;
+  }
+
+  /* cards section */
+  .cards {
+    position: relative;
+    z-index:2;
+    display:flex;
+    gap:20px;
+    justify-content:center;
+    flex-wrap:wrap;
+    padding: 40px 20px 80px;
+    background: linear-gradient(180deg, rgba(255,255,255,0.92) 0%, rgba(248,249,252,0.94) 100%);
+    margin: 0 60px;
+    border-radius:14px;
+    box-shadow: 0 10px 30px rgba(2,12,37,0.08);
+    transform: translateY(-40px); /* neat overlap with hero */
+  }
+
+  .card {
+    background: #fff;
+    border-radius:12px;
+    padding:18px 34px;
+    min-width:190px;
+    text-align:center;
+    box-shadow: 0 6px 18px rgba(2,12,37,0.06);
+    border:1px solid #e6eef7;
+    cursor:pointer;
+    transition: transform .25s ease, box-shadow .25s ease, background .25s ease, color .25s;
+    font-weight:600;
+    color:#002147;
+  }
+  .card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 18px 40px rgba(2,12,37,0.12);
+    background: #002147;
+    color:#fff;
+  }
+
+  /* responsive */
+  @media (max-width:860px) {
+    .hero h2 { font-size:28px; padding:0 12px; }
+    .cards { margin: 0 18px; transform: translateY(-20px); padding:28px 12px 48px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- overlay -->
+<div class="overlay" aria-hidden="true"></div>
+
+<header>
+  <div class="brand">
+    <!-- if you have local logo file (logo.png) placed in same folder, it will show; otherwise hide the img tag or keep it -->
+    <img src="logo.png" alt="ITM SLS logo" onerror="this.style.display='none'">
+    <h1>ITM SLS Baroda University</h1>
+  </div>
+  <nav>
+    <a href="studentdashboard.html">Home</a>
+    <a href="placement.html">Placements</a>
+    <a href="contact.html">Contact</a>
+  </nav>
+</header>
+
+<section class="hero" role="banner">
+  <div>
+    <h2>Welcome to the SLS Career Hub</h2>
+    <p>Search companies, apply for placements, generate NOC and track your application status.</p>
+  </div>
+</section>
+
+<section class="cards" aria-label="quick actions">
+  <div class="card" onclick="location.href='project.html'">Project Submission</div>
+  <div class="card" onclick="location.href='internship.html'">Internship / Generate NOC</div>
+  <div class="card" onclick="location.href='placement.html'">Search Placement Jobs</div>
+  <div class="card" onclick="location.href='status.html'">Application Status</div>
+</section>
+
+<script>
+  // small helper so users don't get confused if they forgot to add campus.jpg
+  (function(){
+    const img = new Image();
+    img.src = 'campus.jpg';
+    img.onload = function(){ /* local image loaded — ok */ };
+    img.onerror = function(){
+      // local campus.jpg not present — fallback to online image already used in CSS
+      console.warn('Local campus.jpg not found - using fallback online background image.');
+    };
+  })();
+</script>
+</body>
+</html>

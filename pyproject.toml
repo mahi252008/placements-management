@@ -1,0 +1,9 @@
+[project]
+name = "placements-management"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.7"
+dependencies = [
+    "flask>=2.2.5",
+]
