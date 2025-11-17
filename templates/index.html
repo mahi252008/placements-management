@@ -1,15 +1,15 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hello Flask</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-</head>
-<body>
-    <div class="container">
-        <h1>Hello, Flask! im here 👋</h1>
-        <p>Welcome to your first Flask + uv project.</p>
-    </div>
-</body>
-</html>
+{% extends 'base.html' %}
+{% block content %}
+<h2>Welcome {{ current_user.username }}</h2>
+<form method="POST" action="{{ url_for('add_person') }}">
+  <input name="name" placeholder="Person Name" required>
+  <button type="submit">Add</button>
+</form>
+<h3>All People</h3>
+<ul>
+  {% for p in persons %}
+    <li>{{ p.name }}</li>
+  {% endfor %}
+</ul>
+<a href="{{ url_for('logout') }}">Logout</a>
+{% endblock %}

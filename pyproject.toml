@@ -6,4 +6,10 @@ readme = "README.md"
 requires-python = ">=3.7"
 dependencies = [
     "flask>=2.2.5",
+    "flask-bcrypt>=1.0.1",
+    "flask-login>=0.6.3",
+    "flask-migrate>=4.1.0",
+    "flask-sqlalchemy>=3.0.5",
+    "psycopg2-binary>=2.9.9",
+    "python-dotenv>=0.21.1",
 ]
